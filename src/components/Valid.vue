@@ -4,14 +4,18 @@
 
         <button id="addTask" v-on:click="addTask">Add</button>
         <input
+                name="tasks"
                 type="text"
                 id="taskName"
+                v-validate="'required|min:3'"
         >
+        <div v-show="errors.has('tasks')">
+            {{ errors.first('tasks') }}
+        </div>
         <li v-for="(task, index) in tasks">
             <span>{{task.name}}</span>
             <button v-on:click="deleteTask(index)"> usuń </button>
         </li>
-
     </div>
 </template>
 
@@ -34,9 +38,14 @@
         ,
         methods: {
             addTask: function () {
-                let taskName = document.querySelector('#taskName');
-                this.tasks.push({name: taskName.value});
-                taskName.value = "";
+                this.$validator.validateAll().then(result => {
+                    if (!result) {
+                        return;
+                    }
+                    let taskName = document.querySelector('#taskName');
+                    this.tasks.push({name: taskName.value});
+                    taskName.value = "";
+                });
             }
             ,
             deleteTask: function (index) {
