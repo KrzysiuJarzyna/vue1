@@ -1,8 +1,8 @@
 <template>
-    <div class="forms">
+    <li class="forms">
             <span>{{item.name}}</span> ilość: <span>{{item.quantity}}</span>
             <button v-on:click="deleteTask(index)"> usuń </button>
-    </div>
+    </li>
 </template>
 
 <script>

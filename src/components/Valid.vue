@@ -11,12 +11,12 @@
         <div v-show="errors.has('tasks')">
             {{ errors.first('tasks') }}
         </div>
-        <li v-for="(task, index) in tasks">
+        <div v-for="(task, index) in tasks">
             <Item :item="task" @delete-task="deleteTask()" />
 
             <!--<span>{{task.name}}</span>-->
             <!--<button v-on:click="deleteTask(index)"> usuń </button>-->
-        </li>
+        </div>
     </div>
 </template>
 
