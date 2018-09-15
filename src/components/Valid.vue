@@ -6,7 +6,6 @@
         <input
                 type="text"
                 id="taskName"
-                v-validate="'required|min:3'"
         >
         <li v-for="(task, index) in tasks">
             <span>{{task.name}}</span>
