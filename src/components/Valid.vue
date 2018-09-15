@@ -1,6 +1,5 @@
 <template>
     <div class="forms">
-        <h1>{{ msg }}</h1>
 
         <button id="addTask" v-on:click="addTask">Add</button>
         <input
@@ -13,29 +12,35 @@
             {{ errors.first('tasks') }}
         </div>
         <li v-for="(task, index) in tasks">
-            <span>{{task.name}}</span>
-            <button v-on:click="deleteTask(index)"> usuń </button>
+            <Item :item="task" @delete-task="deleteTask()" />
+
+            <!--<span>{{task.name}}</span>-->
+            <!--<button v-on:click="deleteTask(index)"> usuń </button>-->
         </li>
     </div>
 </template>
 
 <script>
+
+import Item from './Item.vue'
+
     export default {
-        name: 'HelloWorld',
-        props: {
-            msg: String
+        name: 'Valid',
+        components: {
+            Item
         },
         data() {
             return {
                 greeting: 'Hello Vue!',
                 tasks: [{
-                    name: 'Task 1'
+                    name: 'Task 1',
+                    quantity: 5
                 }, {
-                    name: 'Task 2'
+                    name: 'Task 2',
+                    quantity: 7
                 }]
             }
-        }
-        ,
+        },
         methods: {
             addTask: function () {
                 this.$validator.validateAll().then(result => {
